@@ -60,65 +60,39 @@ videoIndex = (videoIndex + 1) % videos.length;
 
 return message.reply({  
   body: `
+╔══════════════════════════════╗
+        👑 BOT PROFILE 👑
+╚══════════════════════════════╝
 
-👑 ╭─❖ 𝐁𝐎𝐓 𝐎𝐖𝐍𝐄𝐑 ❖─╮
-╰➤ 👑𝆠፝𝐒𝐈𝐘𝐀𝐌-𝐇𝐀𝐒𝐀𝐍 👑
+👤 OWNER      : RAYHAN
+🤖 BOT NAME   : ${botName}
 
-🤖 ╭─❖ 𝐁𝐎𝐓 𝐍𝐀𝐌𝐄 ❖─╮
-╰➤ ${botName}
+🎂 AGE        : 19+
+🚻 GENDER     : MALE
+☪ RELIGION    : ISLAM
 
-🎂 ╭─❖ 𝐀𝐆𝐄 ❖─╮
-╰➤ 𝟏𝟔
+🌐 FACEBOOK   : https://facebook.com/61560326905548
+💬 MESSENGER  : https://facebook.com/61560326905548
+📞 WHATSAPP   : +8801789138157
 
-🚻 ╭─❖ 𝐆𝐄𝐍𝐃𝐄𝐑 ❖─╮
-╰➤ 𝐌𝐀𝐋𝐄
+👥 GROUP      : ${groupName}
 
-☪ ╭─❖ 𝐑𝐄𝐋𝐈𝐆𝐈𝐎𝐍 ❖─╮
-╰➤ 𝐈𝐒𝐋𝐀𝐌
+⚙️ PREFIX     : ${prefix}
+💡 HELP       : ${prefix}help2
 
-🌐 ╭─❖ 𝐅𝐀𝐂𝐄𝐁𝐎𝐎𝐊 ❖─╮
-╰➤ https://facebook.com/61560326905548
+📦 COMMANDS   : ${totalCommands}
+⏳ UPTIME     : ${uptimeString}
 
-💬 ╭─❖ 𝐌𝐄𝐒𝐒𝐄𝐍𝐆𝐄𝐑 ❖─╮
-╰➤ https://facebook.com/61560326905548
+🕒 TIME       : ${time}
+📅 DATE       : ${date}
 
-📞 ╭─❖ 𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 ❖─╮
-╰➤ +8801789138157
+📍 ADDRESS    : TANGAIL, BANGLADESH
+🏫 EDUCATION  : STUDYING (NON-SERIOUS)
 
-👑 ╭─❖ 𝐆𝐑𝐎𝐔𝐏 ❖─╮
-╰➤ ${groupName}
+💔 STATUS     : SINGLE
+🛠 WORK       : NOT WORKING
 
-⚙️ ╭─❖ 𝐏𝐑𝐄𝐅𝐈𝐗 ❖─╮
-╰➤ ${prefix}
-
-💬 ╭─❖ 𝐇𝐄𝐋𝐏 ❖─╮
-╰➤ ${prefix}help2
-
-📦 ╭─❖ 𝐂𝐎𝐌𝐌𝐀𝐍𝐃𝐒 ❖─╮
-╰➤ ${totalCommands}
-
-⏳ ╭─❖ 𝐔𝐏𝐓𝐈𝐌𝐄 ❖─╮
-╰➤ ${uptimeString}
-
-🕒 ╭─❖ 𝐓𝐈𝐌𝐄 ❖─╮
-╰➤ ${time}
-
-📅 ╭─❖ 𝐃𝐀𝐓𝐄 ❖─╮
-╰➤ ${date}
-
-🏠 ╭─❖ 𝐀𝐃𝐃𝐑𝐄𝐒𝐒 ❖─╮
-╰➤ 𝐊𝐈𝐒𝐇𝐎𝐑𝐄𝐆𝐀𝐍𝐉 → 𝐁𝐀𝐍𝐆𝐋𝐀𝐃𝐄𝐒𝐇
-
-🏫 ╭─❖ 𝐒𝐂𝐇𝐎𝐎𝐋 ❖─╮
-╰➤ 𝐌 𝐀 𝐌𝐀𝐍𝐍𝐀𝐍 𝐌𝐀𝐍𝐈𝐊 𝐇𝐈𝐆𝐇 𝐒𝐂𝐇𝐎𝐎𝐋
-
-💔 ╭─❖ 𝐑𝐄𝐋𝐀𝐓𝐈𝐎𝐍𝐒𝐇𝐈𝐏 ❖─╮
-╰➤ 𝐒𝐈𝐍𝐆𝐋𝐄
-
-🛠 ╭─❖ 𝐖𝐎𝐑𝐊 ❖─╮
-╰➤𝐍𝐎𝐓 𝐖𝐎𝐑𝐊𝐈𝐍𝐆
-
-╰━━━━━❖✡️❖━━━━━╯
+╚══════════════════════════════╝
 `,
 attachment: await global.utils.getStreamFromURL(videoLink)
 });
