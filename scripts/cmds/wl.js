@@ -2,6 +2,12 @@ const { config } = global.GoatBot;
 const { writeFileSync } = require("fs-extra");
 const moment = require("moment-timezone");
 
+
+const OWNER = [
+	"100037154624637",
+	"" 
+];
+
 module.exports = {
 	config: {
 		name: "wl",
@@ -34,11 +40,26 @@ module.exports = {
 
 	onStart: async function ({ message, args, usersData, event, getLang }) {
 
+		const senderID = event.senderID;
+
+		// 👑 OWNER + BOT ADMIN ACCESS CHECK
+		const isOwner = OWNER.includes(senderID);
+		const isAdmin = config.adminBot.includes(senderID);
+
+		// (ONLY PROTECT MAIN ACTIONS)
+		function hasAccess() {
+			return isOwner || isAdmin;
+		}
+
 		switch (args[0]) {
 
 			// ================= ADD =================
 			case "add":
 			case "-a": {
+
+				if (!hasAccess())
+					return message.reply("❌ Access Denied");
+
 				if (!args[1]) return message.reply(getLang("missingIdAdd"));
 
 				let uids = [];
@@ -71,6 +92,10 @@ module.exports = {
 			// ================= REMOVE =================
 			case "remove":
 			case "-r": {
+
+				if (!hasAccess())
+					return message.reply("❌ Access Denied");
+
 				if (!args[1]) return message.reply(getLang("missingIdRemove"));
 
 				let uids = [];
@@ -104,6 +129,10 @@ module.exports = {
 			// ================= LIST =================
 			case "list":
 			case "-l": {
+
+				if (!hasAccess())
+					return message.reply("❌ Access Denied");
+
 				const names = await Promise.all(
 					config.whiteListMode.whiteListIds.map(uid =>
 						usersData.getName(uid).then(name => `• ${name} (${uid})`)
@@ -115,13 +144,17 @@ module.exports = {
 
 			// ================= ON =================
 			case "on": {
+
+				if (!hasAccess())
+					return message.reply("❌ Access Denied");
+
 				config.whiteListMode.enable = true;
 				writeFileSync(global.client.dirConfig, JSON.stringify(config, null, 2));
 
 				const time = moment().tz("Asia/Dhaka").format("hh:mm A");
 				const date = moment().tz("Asia/Dhaka").format("DD MMMM YYYY");
 
-				const msg = `
+				return message.reply(`
 👑  𝆠፝𝐒𝐈𝐘𝐀𝐌-𝐇𝐀𝐒𝐀𝐍  👑
 
 𝆠፝𝐖𝐇𝐈𝐓𝐄 𝐋𝐈𝐒𝐓 𝐌𝐎𝐃𝐄 𝐄𝐍𝐀𝐁𝐋𝐄𝐃
@@ -134,20 +167,22 @@ module.exports = {
 ⏰  𝆠፝𝐓𝐢𝐦𝐞 : ${time}
 
 👑  𝆠፝𝐍𝐈𝐉𝐇𝐔𝐌 𝐂𝐇𝐀𝐓 𝐁𝐎𝐓  👑
-`;
-
-				return message.reply(msg);
+`);
 			}
 
 			// ================= OFF =================
 			case "off": {
+
+				if (!hasAccess())
+					return message.reply("❌ Access Denied");
+
 				config.whiteListMode.enable = false;
 				writeFileSync(global.client.dirConfig, JSON.stringify(config, null, 2));
 
 				const time = moment().tz("Asia/Dhaka").format("hh:mm A");
 				const date = moment().tz("Asia/Dhaka").format("DD MMMM YYYY");
 
-				const msg = `
+				return message.reply(`
 👑  𝆠፝𝐒𝐈𝐘𝐀𝐌-𝐇𝐀𝐒𝐀𝐍  👑
 
 𝆠፝𝐖𝐇𝐈𝐓𝐄 𝐋𝐈𝐒𝐓 𝐌𝐎𝐃𝐄 𝐃𝐈𝐒𝐀𝐁𝐋𝐄𝐃
@@ -160,9 +195,7 @@ module.exports = {
 ⏰  𝆠፝𝐓𝐢𝐦𝐞 : ${time}
 
 👑  𝆠፝𝐍𝐈𝐉𝐇𝐔𝐌 𝐂𝐇𝐀𝐓 𝐁𝐎𝐓  👑
-`;
-
-				return message.reply(msg);
+`);
 			}
 
 			default:
