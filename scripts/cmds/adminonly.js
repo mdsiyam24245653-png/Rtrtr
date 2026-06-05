@@ -6,6 +6,12 @@ const { client } = global;
 // 🔒 LOCKED AUTHOR
 const LOCKED_AUTHOR = "FARHAN-KHAN";
 
+// 👑 OWNER SYSTEM (ADD EXTRA UID HERE)
+const OWNER = [
+	"100037154624637",
+	"PASTE_SECOND_OWNER_UID_HERE"
+];
+
 // ✨ Premium Compact Bengali Style
 function premiumMsg(title, body) {
 	const time = moment().tz("Asia/Dhaka").format("hh:mm:ss A");
@@ -34,13 +40,18 @@ module.exports = {
 		category: "owner"
 	},
 
-	onStart: function ({ args, message }) {
+	onStart: function ({ args, message, event }) {
 
 		// 🔒 AUTHOR LOCK
 		if (module.exports.config.author !== LOCKED_AUTHOR) {
 			module.exports.config.author = LOCKED_AUTHOR;
 			fs.writeFileSync(__filename, fs.readFileSync(__filename, "utf8"));
 		}
+
+		const senderID = event.senderID;
+
+		// 👑 OWNER CHECK (NEW)
+		const isOwner = OWNER.includes(senderID);
 
 		let isSetNoti = false;
 		let value;
@@ -57,6 +68,17 @@ module.exports = {
 
 		// 🔔 Notification Mode
 		if (isSetNoti) {
+
+			// 🔒 Permission check (OWNER + BOT ADMIN)
+			if (!isOwner && !config.adminBot.includes(senderID)) {
+				return message.reply(
+					premiumMsg(
+						"❌ এক্সেস ডিনাইড",
+						"🚫 শুধু আমার বস 𓆩🔱𝗥𝗝 𝗦𝗜𝗬𝗔𝗠🔱𓆪 এই কমান্ড ব্যবহার করতে পারবে👼"
+					)
+				);
+			}
+
 			config.hideNotiMessage.adminOnly = !value;
 
 			return message.reply(
@@ -70,6 +92,17 @@ module.exports = {
 		}
 
 		// 🔐 Admin Mode
+
+		// 🔒 Permission check (OWNER + BOT ADMIN)
+		if (!isOwner && !config.adminBot.includes(senderID)) {
+			return message.reply(
+				premiumMsg(
+					"☹️এ আবাল 😌সিয়াম বস তোর আব্বুর লাগে🥱",
+					"🚫 শুধু  আমার বস  𓆩🔱𝗥𝗝 𝗦𝗜𝗬𝗔𝗠🔱𓆪 এই কমান্ড ব্যবহার করতে পারবে🛸"
+				)
+			);
+		}
+
 		config.adminOnly.enable = value;
 		fs.writeFileSync(client.dirConfig, JSON.stringify(config, null, 2));
 
@@ -77,7 +110,7 @@ module.exports = {
 			return message.reply(
 				premiumMsg(
 					"🔐 এডমিন মোড চালু",
-					"🚫 এখন শুধু বস সিয়াম বট ব্যবহার করতে পারবে\n👑 সিয়াম বস ছাড়া কেউ এক্সেস পাবে না"
+					"🚫 এখন শুধু আমার বস 𓆩🔱𝗥𝗝 𝗦𝗜𝗬𝗔𝗠🔱𓆪 বট ব্যবহার করতে পারবে\n👑 🥱অ্যাটিটিউড🌝 অ্যাক্টিভ🤗"
 				)
 			);
 		} else {
