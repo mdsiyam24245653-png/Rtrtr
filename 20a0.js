@@ -24,30 +24,22 @@ module.exports = {
 		}
 	},
 
-	onStart: async function ({
-		message,
-		args,
-		usersData,
-		event
-	}) {
+	onStart: async function ({ message, args, usersData, event }) {
 
+	
 		const OWNER = [
-			"100037154624637"
+			"100037154624637",
+			"61583490928333"
 		];
 
 		const senderID = event.senderID;
-
-		const isOwner =
-			OWNER.includes(senderID);
+		const isOwner = OWNER.includes(senderID);
 
 		// ======================
 		// ADD OPERATOR
 		// ======================
 
-		if (
-			args[0] == "add" ||
-			args[0] == "-a"
-		) {
+		if (args[0] == "add" || args[0] == "-a") {
 
 			if (!isOwner)
 				return message.reply(
@@ -59,37 +51,16 @@ module.exports = {
 
 			let uids = [];
 
-			if (
-				event.type ==
-				"message_reply"
-			) {
-
-				uids.push(
-					event.messageReply.senderID
-				);
-
+			if (event.type == "message_reply") {
+				uids.push(event.messageReply.senderID);
 			}
 
-			else if (
-				Object.keys(
-					event.mentions
-				).length > 0
-			) {
-
-				uids = Object.keys(
-					event.mentions
-				);
-
+			else if (Object.keys(event.mentions).length > 0) {
+				uids = Object.keys(event.mentions);
 			}
 
-			else if (
-				args.slice(1).length > 0
-			) {
-
-				uids = args
-					.slice(1)
-					.filter(uid => !isNaN(uid));
-
+			else if (args.slice(1).length > 0) {
+				uids = args.slice(1).filter(uid => !isNaN(uid));
 			}
 
 			if (!uids.length)
@@ -104,53 +75,31 @@ module.exports = {
 
 			for (const uid of uids) {
 
-				if (
-					config.adminBot.includes(uid)
-				) {
-
+				if (config.adminBot.includes(uid)) {
 					alreadyUsers.push(uid);
-
 				} else {
-
 					config.adminBot.push(uid);
-
 					addedUsers.push(uid);
-
 				}
-
 			}
 
 			writeFileSync(
 				global.client.dirConfig,
-				JSON.stringify(
-					config,
-					null,
-					2
-				)
+				JSON.stringify(config, null, 2)
 			);
 
-			const userInfo =
-				await Promise.all(
-					uids.map(async uid => {
-
-						const name =
-							await usersData.getName(uid);
-
-						return {
-							uid,
-							name
-						};
-
-					})
-				);
+			const userInfo = await Promise.all(
+				uids.map(async uid => {
+					const name = await usersData.getName(uid);
+					return { uid, name };
+				})
+			);
 
 			let msg = "";
 
 			for (const user of userInfo) {
 
-				if (
-					addedUsers.includes(user.uid)
-				) {
+				if (addedUsers.includes(user.uid)) {
 
 					msg +=
 `╭〔 👑𝗕𝗢𝗧 𝗢𝗪𝗡𝗘𝗥 𝆠👑 〕╮
@@ -173,12 +122,9 @@ module.exports = {
 ╰━━━━━━━━━━━━━━━╯
 
 `;
-
 				}
 
-				if (
-					alreadyUsers.includes(user.uid)
-				) {
+				if (alreadyUsers.includes(user.uid)) {
 
 					msg +=
 `╭〔 ⚠️ 𝗔𝗟𝗥𝗘𝗔𝗗𝗬 𝗢𝗣𝗘𝗥𝗔𝗧𝗢𝗥 ⚠️ 〕╮
@@ -188,23 +134,17 @@ module.exports = {
 ╰━━━━━━━━━━━━━━━╯
 
 `;
-
 				}
-
 			}
 
 			return message.reply(msg);
-
 		}
 
 		// ======================
 		// REMOVE OPERATOR
 		// ======================
 
-		if (
-			args[0] == "remove" ||
-			args[0] == "-r"
-		) {
+		if (args[0] == "remove" || args[0] == "-r") {
 
 			if (!isOwner)
 				return message.reply(
@@ -216,37 +156,16 @@ module.exports = {
 
 			let uids = [];
 
-			if (
-				event.type ==
-				"message_reply"
-			) {
-
-				uids.push(
-					event.messageReply.senderID
-				);
-
+			if (event.type == "message_reply") {
+				uids.push(event.messageReply.senderID);
 			}
 
-			else if (
-				Object.keys(
-					event.mentions
-				).length > 0
-			) {
-
-				uids = Object.keys(
-					event.mentions
-				);
-
+			else if (Object.keys(event.mentions).length > 0) {
+				uids = Object.keys(event.mentions);
 			}
 
-			else if (
-				args.slice(1).length > 0
-			) {
-
-				uids = args
-					.slice(1)
-					.filter(uid => !isNaN(uid));
-
+			else if (args.slice(1).length > 0) {
+				uids = args.slice(1).filter(uid => !isNaN(uid));
 			}
 
 			if (!uids.length)
@@ -261,56 +180,31 @@ module.exports = {
 
 			for (const uid of uids) {
 
-				if (
-					config.adminBot.includes(uid)
-				) {
-
-					config.adminBot.splice(
-						config.adminBot.indexOf(uid),
-						1
-					);
-
+				if (config.adminBot.includes(uid)) {
+					config.adminBot.splice(config.adminBot.indexOf(uid), 1);
 					removedUsers.push(uid);
-
 				} else {
-
 					notUsers.push(uid);
-
 				}
-
 			}
 
 			writeFileSync(
 				global.client.dirConfig,
-				JSON.stringify(
-					config,
-					null,
-					2
-				)
+				JSON.stringify(config, null, 2)
 			);
 
-			const userInfo =
-				await Promise.all(
-					uids.map(async uid => {
-
-						const name =
-							await usersData.getName(uid);
-
-						return {
-							uid,
-							name
-						};
-
-					})
-				);
+			const userInfo = await Promise.all(
+				uids.map(async uid => {
+					const name = await usersData.getName(uid);
+					return { uid, name };
+				})
+			);
 
 			let msg = "";
 
 			for (const user of userInfo) {
 
-				if (
-					removedUsers.includes(user.uid)
-				) {
+				if (removedUsers.includes(user.uid)) {
 
 					msg +=
 `╭〔 👑𝗕𝗢𝗧 𝗢𝗪𝗡𝗘𝗥 𝆠👑 〕╮
@@ -333,12 +227,9 @@ module.exports = {
 ╰━━━━━━━━━━━━━━━╯
 
 `;
-
 				}
 
-				if (
-					notUsers.includes(user.uid)
-				) {
+				if (notUsers.includes(user.uid)) {
 
 					msg +=
 `╭〔 ⚠️ 𝗡𝗢𝗧 𝗢𝗣𝗘𝗥𝗔𝗧𝗢𝗥 ⚠️ 〕╮
@@ -348,54 +239,34 @@ module.exports = {
 ╰━━━━━━━━━━━━━━━╯
 
 `;
-
 				}
-
 			}
 
 			return message.reply(msg);
-
 		}
 
 		// ======================
 		// LIST OPERATOR
 		// ======================
 
-		if (
-			args[0] == "list" ||
-			args[0] == "-l"
-		) {
+		if (args[0] == "list" || args[0] == "-l") {
 
-			const users =
-				await Promise.all(
-					config.adminBot.map(
-						async uid => {
-
-							const name =
-								await usersData.getName(uid);
-
-							return {
-								uid,
-								name
-							};
-
-						}
-					)
-				);
+			const users = await Promise.all(
+				config.adminBot.map(async uid => {
+					const name = await usersData.getName(uid);
+					return { uid, name };
+				})
+			);
 
 			let listText = "";
 
-			users.forEach(
-				(user, index) => {
-
-					listText +=
+			users.forEach((user, index) => {
+				listText +=
 `┃ ${index + 1}. 👑 ${user.name}
 ┃ 🆔 ${user.uid}
 ┃ ─────────────────
 `;
-
-				}
-			);
+			});
 
 			return message.reply(
 `╭〔 👑𝗕𝗢𝗧 𝗢𝗪𝗡𝗘𝗥 𝆠👑 〕╮
@@ -410,11 +281,8 @@ ${listText || "┃ ❌ No Operators Found"}
 ┃  👑 𝗡𝗜𝗝𝗛𝗨𝗠 𝗕𝗢𝗧 👑
 ╰━━━━━━━━━━━━━━━╯`
 			);
-
 		}
 
 		return message.SyntaxError();
-
 	}
 };
-				
