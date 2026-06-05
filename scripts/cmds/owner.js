@@ -100,41 +100,29 @@ module.exports = {
 
     const msg = {
       body: `╔❖𝗢𝗪𝗡𝗘𝗥 𝗜𝗡𝗙𝗢❖╗
- 
-⋆✦⋆⎯⎯⎯⎯⎯⎯⎯⎯⎯⋆✦⋆ 
-[🤖]↓:𝐁𝐎𝐓→𝐀𝐃𝐌𝐈𝐍:↓
-➤ 『 𝐔𝐃𝐀𝐘 𝐇𝐀𝐒𝐀𝐍 𝐒𝐈𝐘𝐀𝐌 』
-⋆✦⋆⎯⎯⎯⎯⎯⎯⎯⎯⎯⋆✦⋆
-🪯🚬🪬⚔️📡✨🐸🙄🛡️
 
-[🏠]↓:𝐀𝐃𝐃𝐑𝐄𝐒𝐒:↓
-➤ 『 𝐊𝐈𝐒𝐇𝐎𝐑𝐄𝐆𝐀𝐍𝐉 』
+👤 OWNER      : RAYHAN
+🤖 BOT NAME   : ${botName}
 
-[🕋]↓:𝐑𝐄𝐋𝐈𝐆𝐈𝐎𝐍:↓
-➤ 『 𝐈𝐒𝐋𝐀𝐌 』
+🎂 AGE        : 19+
+🚻 GENDER     : MALE
+☪ RELIGION    : ISLAM
 
-[🚻]↓:𝐆𝐄𝐍𝐃𝐄𝐑:↓
-➤ 『 𝐌𝐀𝐋𝐄 』
+🌐 FACEBOOK   : https://facebook.com/61560326905548
+💬 MESSENGER  : https://facebook.com/61560326905548
+📞 WHATSAPP   : +8801789138157
 
-[💞]↓:𝐑𝐄𝐋𝐀𝐓𝐈𝐎𝐍𝐒𝐇𝐈𝐏:↓
-➤ 『 𝐒𝐈𝐍𝐆𝐋𝐄 』
+📍 ADDRESS    : TANGAIL, BANGLADESH
+🏫 EDUCATION  : STUDYING (NON-SERIOUS)
 
-[🧑‍🎓]↓:𝐖𝐎𝐑𝐊:↓
-➤ 『 𝐒𝐓𝐔𝐃𝐄𝐍𝐓 』
+💔 STATUS     : SINGLE
+🛠 WORK       : NOT WORKING
 
+╚══════════════════════════════╝
 📅 Date: ${date}
 ⏰ Time: ${time}
 
 ⋆✦⋆══🅲🅾🅽🆃🅰🅲🆃══⋆✦⋆
-
-[📞] 𝗪𝗛𝗔𝗧𝗦𝗔𝗣𝗣
-➤ https://wa.me/+8801789138157
-
-[🌍] 𝐅𝐀𝐂𝐄𝐁𝐎𝐎𝐊 𝐈𝐃 (❶)
-➤ ${ownerFB1}
-
-[🌍] 𝐅𝐀𝐂𝐄𝐁𝐎𝐎𝐊 𝐈𝐃 (❷)
-➤ ${ownerFB2}
 
 ╚❖👑𝆠፝𝐒𝐈𝐘𝐀𝐌-𝐇𝐀𝐒𝐀𝐍👑❖╝`
     };
