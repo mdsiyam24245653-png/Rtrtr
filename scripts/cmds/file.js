@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { config } = global.GoatBot;
 
 module.exports = {
   config: {
@@ -17,13 +18,18 @@ module.exports = {
 
   onStart: async function ({ args, message, event }) {
 
-    // 🔐 ONLY YOUR UID CAN USE
-    const ownerUID = "100037154624637";
+    
+    const OWNER = [
+      "100037154624637"
+    ];
 
-    const isAdmin = event.senderID === ownerUID;
+    const senderID = event.senderID;
 
-    // ❌ NOT OWNER
-    if (!isAdmin) {
+    // 🔐 OWNER + BOT ADMIN ACCESS
+    const isOwner = OWNER.includes(senderID);
+    const isAdmin = config.adminBot.includes(senderID);
+
+    if (!isOwner && !isAdmin) {
       return message.reply(`
   👑𝆠፝𝐒𝐈𝐘𝐀𝐌-𝐇𝐀𝐒𝐀𝐍 👑
 😾 কিরে ফাইল কি 😼তোর বাপে বানাইছে 🙄
@@ -32,7 +38,6 @@ module.exports = {
 `);
     }
 
-    // 📌 COMMAND NAME
     const cmdName = args[0];
 
     if (!cmdName) {
@@ -41,27 +46,22 @@ module.exports = {
       );
     }
 
-    // 📂 COMMAND PATH
     const cmdPath = path.join(__dirname, `${cmdName}.js`);
 
-    // ❌ FILE NOT FOUND
     if (!fs.existsSync(cmdPath)) {
       return message.reply(`❌ | Command "${cmdName}" not found.`);
     }
 
     try {
 
-      // 📖 READ FILE
       const code = fs.readFileSync(cmdPath, "utf8");
 
-      // ⚠️ LARGE FILE BLOCK
       if (code.length > 19000) {
-        return message.reply("⚠️ | File too large to display.");
+        return message.reply("😁 | File too large to display.");
       }
 
-      // ✅ SEND CODE
       return message.reply({
-        body: `📄 | Source code of "${cmdName}.js":\n\n${code}`
+        body: `😝 | Source code of "${cmdName}.js":\n\n${code}`
       });
 
     } catch (err) {
